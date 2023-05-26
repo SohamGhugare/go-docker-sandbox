@@ -1,16 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func main(){
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
-		fmt.Fprintln(w, "root")
+// Handling the root route
+func HandleRoot(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "root",
 	})
+}
 
-	fmt.Println("Server listening at localhost:8081...")
-	log.Fatal(http.ListenAndServe(":8081", nil))
+func main(){
+	// Initializing server
+	r := gin.Default()
+
+	// Registering routes
+	r.GET("/", HandleRoot)
+
+	// Running the instance
+	r.Run()
 }
