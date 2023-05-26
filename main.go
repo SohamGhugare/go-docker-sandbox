@@ -21,5 +21,5 @@ func main(){
 	r.GET("/", HandleRoot)
 
 	// Running the instance
-	r.Run()
+	r.Run(":8081")
 }
